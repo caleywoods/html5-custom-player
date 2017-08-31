@@ -12,6 +12,8 @@ playBtn.onclick = () => {
         vidya.play().then(() => {
             // Anything in here is called after the promise is fulfilled
             vidya.classList.add( 'playing' );
+        }, (err) => {
+            console.log( err );
         });
     }
 }
