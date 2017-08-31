@@ -9,11 +9,13 @@ playBtn.onclick = () => {
         vidya.pause();
         vidya.classList.remove( 'playing' );
     } else {
-        vidya.play().then(() => {
-            // Anything in here is called after the promise is fulfilled
-            vidya.classList.add( 'playing' );
-        }, (err) => {
-            console.log( err );
-        });
+        vidya.play()
+            .then(() => {
+                // Anything in here is called after the promise is fulfilled
+                vidya.classList.add( 'playing' );
+            })
+            .catch((err) => {
+                console.log( err );
+            });
     }
 }
