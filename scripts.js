@@ -1,8 +1,11 @@
-const vidya    = document.querySelector('.player__video');
-const controls = document.querySelector('.player__controls');
-const playBtn  = document.querySelector('.player__button');
+const vidya       = document.querySelector('.player__video');
+const controls    = document.querySelector('.player__controls');
+const playBtn     = document.querySelector('.player__button');
+const skipButtons = document.querySelectorAll('[data-skip]');
 
+console.log( skipButtons );
 
+// TODO here, can we show a pause graphic instead of play symbol?
 playBtn.onclick = () => {
     // only play returns a promise, pause does not.
     if ( vidya.classList.contains('playing') ) {
@@ -19,6 +22,16 @@ playBtn.onclick = () => {
             });
     }
 }
+
+skipButtons.onclick = () => {
+    console.log( 'haerawer' );
+}
+
+skipButtons[0].onclick = () => {
+    console.log('test');
+}
+
+
 
 /* <video> element is and HTMLVideoElement which inherits from HTMLMediaElement
  * HTMLMediaElement contains a currentTime property which indicates the current playback time in seconds
