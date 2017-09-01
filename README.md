@@ -7,7 +7,7 @@ From this lesson so far I have learned JS has vanilla support for Promises.
 It was also a good reminder that it's not always best to use arrow functions because of lack of 'this' binding, can cause you to write more verbose code.
 
 #### TODOS:
-* Refactor the query selectors at the top, there's probably a way to select just body or `<video>` and query what we want out of that element.
+* Refactor the query selectors at the top of `scripts.js`, there's probably a way to select just body or `<video>` and query what we want out of that element.
 
 * Convert to function declarations and inline things where possible.
 
