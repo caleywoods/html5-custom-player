@@ -10,14 +10,14 @@ playBtn.onclick = (e) => {
   if ( vidya.classList.contains('playing') ) {
     vidya.pause();
     vidya.classList.remove( 'playing' );
-    e.target.innerText = '❚ ❚';
+    e.target.innerText = '►';
     /* turn the lights down for the attraction */
     bahdy.style.backgroundColor = '#2f2f2f';
   } else {
     vidya.play()
       .then(() => {
         // Anything in here is called after the promise is fulfilled
-        e.target.innerText = '►';
+        e.target.innerText = '❚ ❚';
         vidya.classList.add( 'playing' );
         /* bring the lights up slowly */
         bahdy.style.backgroundColor = '#000';
