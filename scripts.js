@@ -8,7 +8,6 @@ const volumeSlider   = document.querySelector( '[name="volume"]' );
 const fullscreen     = document.querySelector( '[name="fullscreen"]' );
 
 function playPause(e) {
-  console.log(e);
   if ( vidya.classList.contains('playing') ) {
     vidya.pause();
     vidya.classList.remove( 'playing' );
@@ -46,11 +45,7 @@ playBtn.onclick = (e) => { playPause(e) };
 vidya.onclick = (e) => { playPause(e) };
 
 /**
- * Notice here since we're not using an arrow function `this` is available
- * and refers to the playback rate slider. Unlike in the playBtn where since
- * it's an arrow function we just pass in the event and have to use event.target
- *
- * Also we're binding to oninput, onchange only fires one time no matter how
+ * We're binding to oninput, onchange only fires one time no matter how
  * far forward or backwards the user dragged the input and we need an event per
  * defined step of the el
  */
