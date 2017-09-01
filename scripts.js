@@ -5,19 +5,32 @@ const skipButtons    = document.querySelectorAll( '[data-skip]' );
 const bahdy          = document.querySelector( 'body' ); // that's how John Mayer would say it.
 const playBackSlider = document.querySelector( '[name="playbackRate"]' );
 const volumeSlider   = document.querySelector( '[name="volume"]' );
+const fullscreen     = document.querySelector( '[name="fullscreen"]' );
 
-playBtn.onclick = (e) => {
+function playPause(e) {
+  console.log(e);
   if ( vidya.classList.contains('playing') ) {
     vidya.pause();
     vidya.classList.remove( 'playing' );
-    e.target.innerText = '►';
+
+    if ( e.target.nodeName === 'VIDEO' ) {
+      playBtn.innerText = '►';
+    } else {
+      e.target.innerText = '►';
+    }
+
     /* turn the lights down for the attraction */
     bahdy.style.backgroundColor = '#2f2f2f';
   } else {
     vidya.play()
       .then(() => {
         // Anything in here is called after the promise is fulfilled
-        e.target.innerText = '❚ ❚';
+        if ( e.target.nodeName === 'VIDEO' ) {
+          playBtn.innerText = '❚ ❚';
+        } else {
+          e.target.innerText = '❚ ❚';
+        }
+
         vidya.classList.add( 'playing' );
         /* bring the lights up slowly */
         bahdy.style.backgroundColor = '#000';
@@ -27,6 +40,10 @@ playBtn.onclick = (e) => {
       });
   }
 }
+
+playBtn.onclick = (e) => { playPause(e) };
+
+vidya.onclick = (e) => { playPause(e) };
 
 /**
  * Notice here since we're not using an arrow function `this` is available
@@ -44,6 +61,8 @@ playBackSlider.oninput = function() {
 volumeSlider.oninput = function() {
   vidya.volume = this.value;
 }
+
+fullscreen.onclick = () => {vidya.webkitRequestFullscreen()};
 
 /**
  * since this is a function expression it must be defined prior to setting it 
