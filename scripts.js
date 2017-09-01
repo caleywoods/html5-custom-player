@@ -1,8 +1,9 @@
-const vidya       = document.querySelector('.player__video');
-const controls    = document.querySelector('.player__controls');
-const playBtn     = document.querySelector('.player__button');
-const skipButtons = document.querySelectorAll('[data-skip]');
-const bahdy       = document.querySelector( 'body' ); // that's how John Mayer would say it.
+const vidya          = document.querySelector( '.player__video' );
+const controls       = document.querySelector( '.player__controls' );
+const playBtn        = document.querySelector( '.player__button' );
+const skipButtons    = document.querySelectorAll( '[data-skip]' );
+const bahdy          = document.querySelector( 'body' ); // that's how John Mayer would say it.
+const playBackSlider = document.querySelector( '[name="playbackRate"]' );
 
 playBtn.onclick = (e) => {
   if ( vidya.classList.contains('playing') ) {
@@ -24,6 +25,19 @@ playBtn.onclick = (e) => {
         console.log( err );
       });
   }
+}
+
+/**
+ * Notice here since we're not using an arrow function `this` is available
+ * and refers to the playback rate slider. Unlike in the playBtn where since
+ * it's an arrow function we just pass in the event and have to use event.target
+ *
+ * Also we're binding to oninput, onchange only fires one time no matter how
+ * far forward or backwards the user dragged the input and we need an event per
+ * defined step of the el
+ */
+playBackSlider.oninput = function() {
+  vidya.playbackRate = this.value;
 }
 
 /**
