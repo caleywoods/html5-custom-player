@@ -25,30 +25,38 @@ playBtn.onclick = () => {
     }
 }
 
-skipButtons.onclick = () => {
-    console.log( 'haerawer' );
-}
-
-skipButtons[0].onclick = () => {
-    console.log('test');
-}
-
-
-
-/* <video> element is and HTMLVideoElement which inherits from HTMLMediaElement
- * HTMLMediaElement contains a currentTime property which indicates the current playback time in seconds
- * can probably use this for seeking by calling .currentTime() += <value of data-skip seconds>
+/**
+ * since this is a function expression it must be defined prior to setting it 
+ * as the callback for the onclick event of the skip buttons. This doesn't get
+ * hoisted like a function declaration would.
  *
- * May want to do a check for duration to make sure adding 25 seconds doesn't exceed it, not sure how that is
- * handled. May not be needed.
+ * Also, using an arrow function here causes 'this' not to be bound so instead
+ * of being able to use 'this' to refer to our button element all we get is the
+ * MouseEvent, I knew this but this was a good reinforcement.
  *
- * method exists called fastSeek() that takes you to a given time
+ * You can get more succinct with:
+ * const skiperino = function() {vidya.currentTime += parseFloat(this.dataset.skip);}
+ * 
+ * or lose the function expression all together and go with a declaration
  */
+const skiperino = (e) => {
+  let seconds     = e.target.dataset.skip;
 
-// implement skip ahead -- seekable / seeking (bool)
-/* seekable returns a TimeRange object that contains the time ranges a user is able to seek to */
+  vidya.currentTime += parseFloat( seconds );
+}
 
-// implement skip back
+/**
+ * this works to give each of the skip buttons an onclick event for handling
+ * skipping the video. skipButtons is a NodeList and the documentation
+ * mentions doing NodeList.prototype.addEventListener to attach an event
+ * listener to each item in the NodeList though. Although I like this idea
+ * since it reminds me of monkey patching in Ruby I don't think we should do it
+ * in JS because every current or future NodeList would have that event
+ * listener bound to it, even in other libraries because of prototypal inheritance.
+ */
+for ( let button of skipButtons ) {
+  button.onclick = skiperino;
+}
 
 // implement speed up (likely using vidya.playbackRate)
 
