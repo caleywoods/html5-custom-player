@@ -4,6 +4,7 @@ const playBtn        = document.querySelector( '.player__button' );
 const skipButtons    = document.querySelectorAll( '[data-skip]' );
 const bahdy          = document.querySelector( 'body' ); // that's how John Mayer would say it.
 const playBackSlider = document.querySelector( '[name="playbackRate"]' );
+const volumeSlider   = document.querySelector( '[name="volume"]' );
 
 playBtn.onclick = (e) => {
   if ( vidya.classList.contains('playing') ) {
@@ -40,6 +41,10 @@ playBackSlider.oninput = function() {
   vidya.playbackRate = this.value;
 }
 
+volumeSlider.oninput = function() {
+  vidya.volume = this.value;
+}
+
 /**
  * since this is a function expression it must be defined prior to setting it 
  * as the callback for the onclick event of the skip buttons. This doesn't get
@@ -72,7 +77,3 @@ const skiperino = (e) => {
 for ( let button of skipButtons ) {
   button.onclick = skiperino;
 }
-
-// implement speed up (likely using vidya.playbackRate)
-
-// implement volume? (.volume a double from 0.0 muted to 1.0 loudest)
