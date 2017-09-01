@@ -4,25 +4,26 @@ const playBtn     = document.querySelector('.player__button');
 const skipButtons = document.querySelectorAll('[data-skip]');
 const bahdy       = document.querySelector( 'body' ); // that's how John Mayer would say it.
 
-// TODO here, can we show a pause graphic instead of play symbol?
-playBtn.onclick = () => {
-    if ( vidya.classList.contains('playing') ) {
-        vidya.pause();
-        vidya.classList.remove( 'playing' );
-        /* turn the lights down for the attraction */
-        bahdy.style.backgroundColor = '#2f2f2f';
-    } else {
-        vidya.play()
-            .then(() => {
-                // Anything in here is called after the promise is fulfilled
-                vidya.classList.add( 'playing' );
-                /* bring the lights up slowly */
-                bahdy.style.backgroundColor = '#000';
-            })
-            .catch((err) => {
-                console.log( err );
-            });
-    }
+playBtn.onclick = (e) => {
+  if ( vidya.classList.contains('playing') ) {
+    vidya.pause();
+    vidya.classList.remove( 'playing' );
+    e.target.innerText = '❚ ❚';
+    /* turn the lights down for the attraction */
+    bahdy.style.backgroundColor = '#2f2f2f';
+  } else {
+    vidya.play()
+      .then(() => {
+        // Anything in here is called after the promise is fulfilled
+        e.target.innerText = '►';
+        vidya.classList.add( 'playing' );
+        /* bring the lights up slowly */
+        bahdy.style.backgroundColor = '#000';
+      })
+      .catch((err) => {
+        console.log( err );
+      });
+  }
 }
 
 /**
