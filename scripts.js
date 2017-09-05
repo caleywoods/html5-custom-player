@@ -11,11 +11,15 @@ const progressBar    = document.querySelector( '.progress__filled' );
 
 function updateProgress() {
   const percent  = (vidya.currentTime / vidya.duration) * 100 
-  // Update the flex basis of progressBar
   progressBar.style.flexBasis = `${percent}%`;
 }
 
 function scrub(e) {
+  /* e x axis offset is what position the mouse cursor is on the progress div
+   * in pixels, divide by the width of the progress div in pixels to give us
+   * a decimal percentage (0 to 1) of how far down the progress div the scrub
+   * is happening. Multiply by video duration which is in seconds to give us
+   * the appropriate number of seconds to send the video to. */
   const scrubTime   = (e.offsetX / progress.offsetWidth) * vidya.duration;
   vidya.currentTime = scrubTime;
 }
