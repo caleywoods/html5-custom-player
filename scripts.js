@@ -6,6 +6,15 @@ const bahdy          = document.querySelector( 'body' ); // that's how John Maye
 const playBackSlider = document.querySelector( '[name="playbackRate"]' );
 const volumeSlider   = document.querySelector( '[name="volume"]' );
 const fullscreen     = document.querySelector( '[name="fullscreen"]' );
+const progressBar    = document.querySelector( '.progress__filled' );
+
+function updateProgress() {
+  const percent  = (vidya.currentTime / vidya.duration) * 100 
+  // Update the flex basis of progressBar
+  progressBar.style.flexBasis = `${percent}%`;
+}
+
+vidya.addEventListener('timeupdate', updateProgress);
 
 function playPause(e) {
   if ( vidya.classList.contains('playing') ) {
