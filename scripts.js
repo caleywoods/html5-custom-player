@@ -6,6 +6,7 @@ const bahdy          = document.querySelector( 'body' ); // that's how John Maye
 const playBackSlider = document.querySelector( '[name="playbackRate"]' );
 const volumeSlider   = document.querySelector( '[name="volume"]' );
 const fullscreen     = document.querySelector( '[name="fullscreen"]' );
+const progress       = document.querySelector( '.progress' );
 const progressBar    = document.querySelector( '.progress__filled' );
 
 function updateProgress() {
@@ -13,6 +14,17 @@ function updateProgress() {
   // Update the flex basis of progressBar
   progressBar.style.flexBasis = `${percent}%`;
 }
+
+function scrub(e) {
+  const scrubTime   = (e.offsetX / progress.offsetWidth) * vidya.duration;
+  vidya.currentTime = scrubTime;
+}
+
+let mousedown = false;
+progress.addEventListener('click', scrub);
+progress.addEventListener('mousemove', (e) => mousedown && scrub(e));
+progress.addEventListener('mousedown', () => mousedown = true);
+progress.addEventListener('mouseup', () => mousedown = false);
 
 vidya.addEventListener('timeupdate', updateProgress);
 
