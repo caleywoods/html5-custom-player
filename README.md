@@ -8,7 +8,7 @@ It was also a good reminder that it's not always best to use arrow functions bec
 
 #### TODOS:
 
-* Implement progress tracking and scrubbing, forgot those.
+* ~~Implement progress tracking and scrubbing, forgot those.~~
 
 * Refactor the query selectors at the top of `scripts.js`, there's probably a way to select just body or `<video>` and query what we want out of that element.
 
